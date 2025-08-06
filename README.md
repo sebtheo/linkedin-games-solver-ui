@@ -20,8 +20,8 @@ This is the UI for the LinkedIn Game Solver. It uses Vite and Tailwind CSS and i
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/sebtheo/linkedin-game-solver-ui.git
-cd linkedin-game-solver-ui
+git clone https://github.com/sebtheo/linkedin-games-solver-ui.git
+cd linkedin-games-solver-ui
 ```
 
 2. Install dependencies:
