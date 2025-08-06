@@ -21,11 +21,12 @@ export interface DatesResponse {
   dates: string[];
 }
 
-export type GameType = 'pinpoint' | 'crossclimb' | 'zip' | 'queens' | 'tango';
+export type GameType = "pinpoint" | "crossclimb" | "zip" | "queens" | "tango";
 
 export interface GameInfo {
   name: string;
   description: string;
   color: string;
+  darkColor: string;
   icon: string;
 }

@@ -2,13 +2,69 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Open Runde Font Declarations */
+@font-face {
+  font-family: "Open Runde";
+  src:
+    url("/OpenRunde-1.0.1/web/OpenRunde-Regular.woff2") format("woff2"),
+    url("/OpenRunde-1.0.1/web/OpenRunde-Regular.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Open Runde";
+  src:
+    url("/OpenRunde-1.0.1/web/OpenRunde-Medium.woff2") format("woff2"),
+    url("/OpenRunde-1.0.1/web/OpenRunde-Medium.woff") format("woff");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Open Runde";
+  src:
+    url("/OpenRunde-1.0.1/web/OpenRunde-Semibold.woff2") format("woff2"),
+    url("/OpenRunde-1.0.1/web/OpenRunde-Semibold.woff") format("woff");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Open Runde";
+  src:
+    url("/OpenRunde-1.0.1/web/OpenRunde-Bold.woff2") format("woff2"),
+    url("/OpenRunde-1.0.1/web/OpenRunde-Bold.woff") format("woff");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 @layer base {
   html {
-    font-family: 'Inter', system-ui, sans-serif;
+    font-family: "Open Runde", system-ui, sans-serif;
+    background-color: var(--color-background);
+    color: var(--color-foreground);
   }
-  
+
   body {
-    @apply antialiased;
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    margin: 0;
+    font-family:
+      "Open Runde",
+      system-ui,
+      -apple-system,
+      BlinkMacSystemFont,
+      "Segoe UI",
+      sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    line-height: 1.5;
+    font-weight: 400;
   }
 }
 
@@ -16,7 +72,7 @@
   .animate-fadeIn {
     animation: fadeIn 0.3s ease-in-out;
   }
-  
+
   @keyframes fadeIn {
     from {
       opacity: 0;

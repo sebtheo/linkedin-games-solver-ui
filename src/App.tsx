@@ -1,6 +1,6 @@
 import { Analytics } from "@vercel/analytics/react";
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import Home from './pages/Home';
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import Home from "./pages/Home";
 
 function App() {
   return (

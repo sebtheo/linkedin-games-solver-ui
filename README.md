@@ -1,12 +1,33 @@
-# LinkedIn Game Solver UI
+# LinkedIn Games Solver UI
 
 This is the UI for the LinkedIn Game Solver. It uses Vite and Tailwind CSS and is hosted on Vercel. It makes use of Vercel analytics to track usage.
 
-## Development
+## Prerequisites
+
+- Node.js (version 18 or higher)
+- npm (comes with Node.js)
+
+## Setup
+
+1. Clone the repository:
 
 ```bash
-npm install
-npm run dev
+git clone <repository-url>
+cd linkedin-game-solver-ui
+```
+
+2. Install dependencies:
+
+```bash
+make install
+```
+
+## Development
+
+### Using npm scripts
+
+```bash
+make run
 ```
 
 Access the app at `http://localhost:5173`.
@@ -69,3 +90,35 @@ Response:
   "dates": ["16-05-2025", "15-05-2025"]
 }
 ```
+
+## Code Quality
+
+### Linting
+
+The project uses ESLint for code quality checks. Run linting with:
+
+```bash
+make lint
+```
+
+### Code Formatting
+
+To format your code consistently, install Prettier and run:
+
+```bash
+npm install --save-dev prettier
+make format
+```
+
+## Deployment
+
+The application is automatically deployed to Vercel when changes are pushed to the main branch.
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Run `make lint` to ensure code quality
+5. Run `make format` to format your code
+6. Submit a pull request

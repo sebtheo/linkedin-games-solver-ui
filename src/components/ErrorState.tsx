@@ -1,5 +1,5 @@
-import React from 'react';
-import { AlertTriangle, RefreshCw } from 'lucide-react';
+import React from "react";
+import { AlertTriangle, RefreshCw } from "lucide-react";
 
 interface ErrorStateProps {
   message: string;
@@ -7,6 +7,10 @@ interface ErrorStateProps {
 }
 
 const ErrorState: React.FC<ErrorStateProps> = ({ message, onRetry }) => {
+  const refreshPage = () => {
+    window.location.reload();
+  };
+
   return (
     <div className="flex flex-col items-center justify-center py-16 px-4 text-center">
       <AlertTriangle size={40} className="text-amber-500 mb-4" />
@@ -16,10 +20,10 @@ const ErrorState: React.FC<ErrorStateProps> = ({ message, onRetry }) => {
       <p className="text-slate-600 dark:text-slate-400 mb-6">
         {message || "We couldn't load the solutions. Please try again."}
       </p>
-      
+
       {onRetry && (
-        <button 
-          onClick={onRetry}
+        <button
+          onClick={refreshPage}
           className="flex items-center space-x-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-slate-900"
         >
           <RefreshCw size={16} />

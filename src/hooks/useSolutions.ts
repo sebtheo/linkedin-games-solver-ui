@@ -1,12 +1,15 @@
-import { useState, useEffect } from 'react';
-import { fetchSolution, fetchAvailableDates } from '../services/api';
-import { SolutionResponse, DatesResponse } from '../types';
-import { getFormattedToday } from '../utils/dateUtils';
+import { useState, useEffect } from "react";
+import { fetchSolution, fetchAvailableDates } from "../services/api";
+import { SolutionResponse, DatesResponse } from "../types";
+import { getFormattedToday } from "../utils/dateUtils";
 
 export const useSolutions = (initialDate?: string) => {
-  const [currentSolution, setCurrentSolution] = useState<SolutionResponse | null>(null);
+  const [currentSolution, setCurrentSolution] =
+    useState<SolutionResponse | null>(null);
   const [availableDates, setAvailableDates] = useState<string[]>([]);
-  const [currentDate, setCurrentDate] = useState<string>(initialDate || getFormattedToday());
+  const [currentDate, setCurrentDate] = useState<string>(
+    initialDate || getFormattedToday(),
+  );
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<Error | null>(null);
 
@@ -17,10 +20,12 @@ export const useSolutions = (initialDate?: string) => {
         const datesResponse: DatesResponse = await fetchAvailableDates();
         setAvailableDates(datesResponse.dates);
       } catch (err) {
-        setError(err instanceof Error ? err : new Error('Failed to fetch dates'));
+        setError(
+          err instanceof Error ? err : new Error("Failed to fetch dates"),
+        );
       }
     };
-    
+
     getDates();
   }, []);
 
@@ -33,13 +38,15 @@ export const useSolutions = (initialDate?: string) => {
         setCurrentSolution(solution);
         setError(null);
       } catch (err) {
-        setError(err instanceof Error ? err : new Error('Failed to fetch solution'));
+        setError(
+          err instanceof Error ? err : new Error("Failed to fetch solution"),
+        );
         setCurrentSolution(null);
       } finally {
         setIsLoading(false);
       }
     };
-    
+
     getSolution();
   }, [currentDate]);
 
@@ -55,6 +62,6 @@ export const useSolutions = (initialDate?: string) => {
     currentDate,
     isLoading,
     error,
-    changeDate
+    changeDate,
   };
 };
