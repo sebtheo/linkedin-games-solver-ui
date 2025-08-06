@@ -1,5 +1,13 @@
 # LinkedIn Games Solver UI
 
+This UI displays the answers from this open-source scraper:
+
+Repository:
+> https://github.com/sebtheo/linkedin-games-scraper
+
+PyPI:
+> https://pypi.org/project/linkedin-games-scraper
+
 This is the UI for the LinkedIn Game Solver. It uses Vite and Tailwind CSS and is hosted on Vercel. It makes use of Vercel analytics to track usage.
 
 ## Prerequisites
@@ -12,7 +20,7 @@ This is the UI for the LinkedIn Game Solver. It uses Vite and Tailwind CSS and i
 1. Clone the repository:
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/sebtheo/linkedin-game-solver-ui.git
 cd linkedin-game-solver-ui
 ```
 
