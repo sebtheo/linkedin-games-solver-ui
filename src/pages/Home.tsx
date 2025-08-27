@@ -27,9 +27,9 @@ const Home: React.FC = () => {
   // Update the page title with the current solution date
   useEffect(() => {
     if (currentSolution) {
-      document.title = `LinkedIn Games Solutions - ${currentSolution.date}`;
+      document.title = `LinkedIn Games Solver - ${currentSolution.date}`;
     } else {
-      document.title = "LinkedIn Games Solutions";
+      document.title = "LinkedIn Games Solver";
     }
   }, [currentSolution]);
 
@@ -81,7 +81,7 @@ const Home: React.FC = () => {
 
       <footer className="py-6 bg-white dark:bg-slate-900/90 border-t border-slate-200 dark:border-slate-800">
         <div className="container mx-auto px-4 text-center text-sm text-slate-600 dark:text-slate-400">
-          <p className="mb-2">LinkedIn Games Solutions</p>
+          <p className="mb-2">LinkedIn Games Solver</p>
           <p>
             Built with ❤️ by{" "}
             <a

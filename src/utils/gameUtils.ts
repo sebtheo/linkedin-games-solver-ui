@@ -36,6 +36,13 @@ export const GAMES: Record<GameType, GameInfo> = {
     darkColor: "dark:bg-red-400",
     icon: "Shuffle",
   },
+  sudoku: {
+    name: "Sudoku",
+    description: "Fill the grid with numbers following Sudoku rules",
+    color: "bg-indigo-600",
+    darkColor: "dark:bg-indigo-400",
+    icon: "Grid3X3",
+  },
 };
 
 export const getGameInfo = (gameType: GameType): GameInfo => {
