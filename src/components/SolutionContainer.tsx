@@ -5,7 +5,7 @@ import CrossclimbSolution from "./games/CrossclimbSolution";
 import QueensSolution from "./games/QueensSolution";
 import ZipSolution from "./games/ZipSolution";
 import TangoSolution from "./games/TangoSolution";
-import SudokuSolution from "./games/SudokuSolution";
+import MiniSudokuSolution from "./games/MiniSudokuSolution";
 
 interface SolutionContainerProps {
   solution: Solution;
@@ -20,7 +20,7 @@ const SolutionContainer: React.FC<SolutionContainerProps> = ({ solution }) => {
     queens: true,
     zip: true,
     tango: true,
-    sudoku: true,
+    mini_sudoku: true,
   });
 
   const toggleGame = (game: string) => {
@@ -96,15 +96,15 @@ const SolutionContainer: React.FC<SolutionContainerProps> = ({ solution }) => {
           </div>
         )}
 
-        {solution.sudoku ? (
-          <SudokuSolution
-            solution={solution.sudoku}
-            isExpanded={expandedGames["sudoku"]}
-            onToggle={() => toggleGame("sudoku")}
+        {solution.mini_sudoku ? (
+          <MiniSudokuSolution
+            solution={solution.mini_sudoku}
+            isExpanded={expandedGames["mini_sudoku"]}
+            onToggle={() => toggleGame("mini_sudoku")}
           />
         ) : (
           <div className="text-center text-slate-600 dark:text-slate-400">
-            No solution found for Sudoku
+            No solution found for Mini Sudoku
           </div>
         )}
       </div>

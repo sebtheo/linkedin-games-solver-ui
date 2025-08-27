@@ -8,15 +8,11 @@ export interface Solution {
   queens_board: number[][];
   queens_grid: number;
   tango: string;
-  sudoku?: {
+  mini_sudoku?: {
     solution: number[];
-    grid_solution: number[][];
-    grid_size: {
-      rows: number;
-      cols: number;
-    };
+    grid_size: number;
     preset_cells: number[];
-    name: string;
+    title: string;
   };
 }
 
@@ -31,7 +27,7 @@ export interface DatesResponse {
   dates: string[];
 }
 
-export type GameType = "pinpoint" | "crossclimb" | "zip" | "queens" | "tango" | "sudoku";
+export type GameType = "pinpoint" | "crossclimb" | "zip" | "queens" | "tango" | "mini_sudoku";
 
 export interface GameInfo {
   name: string;

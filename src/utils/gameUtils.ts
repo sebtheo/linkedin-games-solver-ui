@@ -36,8 +36,8 @@ export const GAMES: Record<GameType, GameInfo> = {
     darkColor: "dark:bg-red-400",
     icon: "Shuffle",
   },
-  sudoku: {
-    name: "Sudoku",
+  mini_sudoku: {
+    name: "Mini Sudoku",
     description: "Fill the grid with numbers following Sudoku rules",
     color: "bg-indigo-600",
     darkColor: "dark:bg-indigo-400",
