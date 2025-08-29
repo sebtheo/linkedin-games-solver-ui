@@ -19,7 +19,7 @@ const SudokuSolution: React.FC<SudokuSolutionProps> = ({
   onToggle,
 }) => {
   const { solution: solutionArray, preset_cells, title, grid_size } = solution;
-  
+
   // Convert flat solution array to 2D grid
   const grid_solution: number[][] = [];
   for (let i = 0; i < grid_size; i++) {
@@ -46,8 +46,8 @@ const SudokuSolution: React.FC<SudokuSolutionProps> = ({
           {grid_solution.map((row, rowIndex) =>
             row.map((cell, colIndex) => {
               const isPreset = isPresetCell(rowIndex, colIndex);
-              const isBlockBorder = 
-                (rowIndex % 2 === 0 && rowIndex !== 0) || 
+              const isBlockBorder =
+                (rowIndex % 2 === 0 && rowIndex !== 0) ||
                 (colIndex % 3 === 0 && colIndex !== 0);
 
               return (
@@ -55,22 +55,23 @@ const SudokuSolution: React.FC<SudokuSolutionProps> = ({
                   key={`${rowIndex}-${colIndex}`}
                   className={`
                     flex items-center justify-center text-lg font-medium
-                    ${isPreset 
-                      ? 'bg-indigo-100 dark:bg-indigo-900 text-indigo-800 dark:text-indigo-200' 
-                      : 'bg-white dark:bg-slate-700 text-slate-800 dark:text-slate-200'
+                    ${
+                      isPreset
+                        ? "bg-indigo-100 dark:bg-indigo-900 text-indigo-800 dark:text-indigo-200"
+                        : "bg-white dark:bg-slate-700 text-slate-800 dark:text-slate-200"
                     }
-                    ${isBlockBorder ? 'border-t-2 border-l-2' : 'border border-slate-200 dark:border-slate-600'}
-                    ${rowIndex === 0 ? 'border-t-2' : ''}
-                    ${colIndex === 0 ? 'border-l-2' : ''}
-                    ${rowIndex === grid_size - 1 ? 'border-b-2' : ''}
-                    ${colIndex === grid_size - 1 ? 'border-r-2' : ''}
+                    ${isBlockBorder ? "border-t-2 border-l-2" : "border border-slate-200 dark:border-slate-600"}
+                    ${rowIndex === 0 ? "border-t-2" : ""}
+                    ${colIndex === 0 ? "border-l-2" : ""}
+                    ${rowIndex === grid_size - 1 ? "border-b-2" : ""}
+                    ${colIndex === grid_size - 1 ? "border-r-2" : ""}
                   `}
                   style={{ width: cellSize, height: cellSize }}
                 >
                   {cell}
                 </div>
               );
-            })
+            }),
           )}
         </div>
       </div>

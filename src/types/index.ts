@@ -27,7 +27,13 @@ export interface DatesResponse {
   dates: string[];
 }
 
-export type GameType = "pinpoint" | "crossclimb" | "zip" | "queens" | "tango" | "mini_sudoku";
+export type GameType =
+  | "pinpoint"
+  | "crossclimb"
+  | "zip"
+  | "queens"
+  | "tango"
+  | "mini_sudoku";
 
 export interface GameInfo {
   name: string;
