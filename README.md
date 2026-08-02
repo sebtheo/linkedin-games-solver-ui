@@ -1,132 +1,60 @@
 # LinkedIn Games Solver UI
 
-This UI displays the answers from this open-source scraper:
+Daily LinkedIn games solutions for Pinpoint, Queens, Zip, Tango, Crossclimb, and Mini Sudoku.
 
-Repository:
-> https://github.com/sebtheo/linkedin-games-scraper
-
-PyPI:
-> https://pypi.org/project/linkedin-games-scraper
-
-This is the UI for the LinkedIn Game Solver. It uses Vite and Tailwind CSS and is hosted on Vercel. It makes use of Vercel analytics to track usage.
+Built with **Next.js** (App Router, SSR/SSG) and deployed on Vercel at [solver.sebtheo.uk](https://solver.sebtheo.uk).
 
 ## Prerequisites
 
-- Node.js (version 18 or higher)
-- npm (comes with Node.js)
+- Node.js 18+
+- npm
 
 ## Setup
-
-1. Clone the repository:
 
 ```bash
 git clone https://github.com/sebtheo/linkedin-games-solver-ui.git
 cd linkedin-games-solver-ui
-```
-
-2. Install dependencies:
-
-```bash
 make install
 ```
 
 ## Development
 
-### Using npm scripts
-
 ```bash
 make run
 ```
 
-Access the app at `http://localhost:5173`.
+Open [http://localhost:3000](http://localhost:3000).
 
 ## Backend API
 
-The backend API is in a separate private repository but you can access the data for free at the API endpoint.
-
 ```
-https://linkedin-solver.sebtheo.uk
+https://linkedin-solver.sebtheo.uk/api
 ```
 
-### Fetching today's solutions:
+- `GET /solutions/` - today's solutions
+- `GET /solutions/?date=DD-MM-YYYY` - solutions for a date
+- `GET /dates/` - available dates
 
-```
-https://linkedin-solver.sebtheo.uk/api/solutions
-```
+## SEO
 
-Response:
+The site generates server-rendered pages for:
 
-```json
-{
-  "solutions": {
-    "data": {
-      "pinpoint": "Hebrew letters",
-      "crossclimb": [[0, "CAPE"]], // The first number is the row, the second is the answer
-      "zip": [29, 35], // Where the numbers are on the grid
-      "zip_sequence": [29, 34], // The sequence for the correct answer
-      "zip_grid": 6, // The grid size
-      "queens": [[0, 1]], // The first number is the row, the second is the column
-      "queens_board": [[0, 0, 0, 0, 0, 0, 0, 0]], // Lists of where the colours are on the grid
-      "queens_grid": 8, // The grid size
-      "tango": "011001110010100101001101011010100110" // Tango is always 6x6 grid so start at the top left and go row by row 0 = sun 1 = moon
-    }
-  },
-  "date": "16-05-2025" // The date of the solutions
-}
-```
+- `/` - today's all-games hub
+- `/[DD-MM-YYYY]` - all games for a date
+- `/[DD-MM-YYYY]/[game]` - single-game answer
+- `/archive` - full date archive
+- `/games/[game]` - per-game hub with recent answers
 
-### Fetching solutions for a specific date:
+Sitemap: `https://solver.sebtheo.uk/sitemap.xml`
 
-```
-https://linkedin-solver.sebtheo.uk/api/solutions/?date=2024-01-01
-```
+### After deploying
 
-Response:
+1. Push to `main` (Vercel auto-deploys)
+2. In [Google Search Console](https://search.google.com/search-console), submit `https://solver.sebtheo.uk/sitemap.xml`
+3. Add a project link on [sebtheo.uk](https://sebtheo.uk) pointing to solver.sebtheo.uk (backlink for portfolio SEO)
 
-Same as above for fetching today's solutions.
+## Related
 
-### Fetching the available dates:
-
-```
-https://linkedin-solver.sebtheo.uk/api/dates
-```
-
-Response:
-
-```json
-{
-  "dates": ["16-05-2025", "15-05-2025"]
-}
-```
-
-## Code Quality
-
-### Linting
-
-The project uses ESLint for code quality checks. Run linting with:
-
-```bash
-make lint
-```
-
-### Code Formatting
-
-To format your code consistently, install Prettier and run:
-
-```bash
-npm install --save-dev prettier
-make format
-```
-
-## Deployment
-
-The application is automatically deployed to Vercel when changes are pushed to the main branch.
-
-## Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Run `make lint` to ensure code quality
-5. Run `make format` to format your code
-6. Submit a pull request
+- Scraper: [github.com/sebtheo/linkedin-games-scraper](https://github.com/sebtheo/linkedin-games-scraper)
+- PyPI: [linkedin_games_scraper](https://pypi.org/project/linkedin_games_scraper/)
+- Portfolio: [sebtheo.uk](https://sebtheo.uk)
