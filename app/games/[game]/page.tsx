@@ -15,7 +15,10 @@ import {
 import Breadcrumbs from "@/components/Breadcrumbs";
 import SingleGameSolution from "@/components/SingleGameSolution";
 import JsonLd from "@/components/JsonLd";
-import { buildBreadcrumbJsonLd, buildWebPageJsonLd } from "@/lib/structuredData";
+import {
+  buildBreadcrumbJsonLd,
+  buildWebPageJsonLd,
+} from "@/lib/structuredData";
 
 export const revalidate = 3600;
 

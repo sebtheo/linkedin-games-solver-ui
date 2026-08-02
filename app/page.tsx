@@ -1,10 +1,12 @@
 import { redirect } from "next/navigation";
-import {
-  fetchAvailableDates,
-  fetchSolution,
-} from "@/lib/api";
+import { fetchAvailableDates, fetchSolution } from "@/lib/api";
 import { buildPageMetadata } from "@/lib/metadata";
-import { formatDateShort, getFormattedToday, isToday, toIsoDate } from "@/lib/dateUtils";
+import {
+  formatDateShort,
+  getFormattedToday,
+  isToday,
+  toIsoDate,
+} from "@/lib/dateUtils";
 import { SITE_URL } from "@/lib/constants";
 import PageIntro from "@/components/PageIntro";
 import DateSelector from "@/components/DateSelector";

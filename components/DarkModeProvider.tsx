@@ -22,9 +22,7 @@ export function DarkModeProvider({ children }: { children: React.ReactNode }) {
     if (savedMode !== null) {
       setIsDarkMode(savedMode === "true");
     } else {
-      setIsDarkMode(
-        window.matchMedia("(prefers-color-scheme: dark)").matches,
-      );
+      setIsDarkMode(window.matchMedia("(prefers-color-scheme: dark)").matches);
     }
   }, []);
 

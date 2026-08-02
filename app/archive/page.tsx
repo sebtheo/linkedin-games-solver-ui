@@ -6,7 +6,10 @@ import { formatDateShort, formatMonthYear, getDatePath } from "@/lib/dateUtils";
 import { SITE_URL } from "@/lib/constants";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import JsonLd from "@/components/JsonLd";
-import { buildBreadcrumbJsonLd, buildWebPageJsonLd } from "@/lib/structuredData";
+import {
+  buildBreadcrumbJsonLd,
+  buildWebPageJsonLd,
+} from "@/lib/structuredData";
 
 export const revalidate = 3600;
 
@@ -23,7 +26,8 @@ export default async function ArchivePage() {
         data={[
           buildWebPageJsonLd({
             name: "LinkedIn Games Archive",
-            description: "Browse all archived LinkedIn games solutions by date.",
+            description:
+              "Browse all archived LinkedIn games solutions by date.",
             url: `${SITE_URL}/archive`,
           }),
           buildBreadcrumbJsonLd([

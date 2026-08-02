@@ -10,8 +10,13 @@ export default function Header() {
   return (
     <header className="sticky top-0 z-10 bg-white/90 dark:bg-slate-900/90 transition-colors duration-300 backdrop-blur-sm">
       <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-        <div className="flex items-center space-x-2">
-          <Puzzle size={20} className="text-slate-800 dark:text-slate-100" />
+        <div className="flex items-center justify-center space-x-2">
+          <img
+            src="/logo512.png"
+            alt="Logo"
+            className="w-8 h-8 text-slate-800 dark:text-slate-100 mb-2"
+          />
+
           <h1 className="text-xl font-bold text-slate-800 dark:text-slate-100">
             <Link href="/" className="sm:hidden">
               Solver

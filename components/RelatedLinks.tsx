@@ -28,7 +28,10 @@ export default function RelatedLinks() {
             className="group rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/40 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors p-4"
           >
             <div className="flex items-center gap-2 text-sm font-medium text-slate-800 dark:text-slate-100">
-              <Package size={16} className="text-slate-600 dark:text-slate-400" />
+              <Package
+                size={16}
+                className="text-slate-600 dark:text-slate-400"
+              />
               Package
             </div>
             <div className="text-xs text-slate-600 dark:text-slate-400">
@@ -42,7 +45,10 @@ export default function RelatedLinks() {
             className="group rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/40 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors p-4"
           >
             <div className="flex items-center gap-2 text-sm font-medium text-slate-800 dark:text-slate-100">
-              <Github size={16} className="text-slate-600 dark:text-slate-400" />
+              <Github
+                size={16}
+                className="text-slate-600 dark:text-slate-400"
+              />
               Source Code
             </div>
             <div className="text-xs text-slate-600 dark:text-slate-400">
@@ -56,7 +62,10 @@ export default function RelatedLinks() {
             className="group rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/40 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors p-4"
           >
             <div className="flex items-center gap-2 text-sm font-medium text-slate-800 dark:text-slate-100">
-              <Github size={16} className="text-slate-600 dark:text-slate-400" />
+              <Github
+                size={16}
+                className="text-slate-600 dark:text-slate-400"
+              />
               User Interface
             </div>
             <div className="text-xs text-slate-600 dark:text-slate-400">

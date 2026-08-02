@@ -28,9 +28,7 @@ export function buildWebPageJsonLd(options: {
     name: options.name,
     description: options.description,
     url: options.url,
-    ...(options.datePublished
-      ? { datePublished: options.datePublished }
-      : {}),
+    ...(options.datePublished ? { datePublished: options.datePublished } : {}),
     isPartOf: {
       "@type": "WebSite",
       name: "LinkedIn Games Solver",

@@ -8,7 +8,10 @@ interface PageMetadataOptions {
   gameSlug?: GameSlug;
 }
 
-export function buildPageMetadata({ date, gameSlug }: PageMetadataOptions): Metadata {
+export function buildPageMetadata({
+  date,
+  gameSlug,
+}: PageMetadataOptions): Metadata {
   const readableDate = formatDateShort(date);
   const today = isToday(date);
 
@@ -65,8 +68,7 @@ export function buildArchiveMetadata(): Metadata {
     alternates: { canonical: `${SITE_URL}/archive` },
     openGraph: {
       title: "LinkedIn Games Archive",
-      description:
-        "Browse all archived LinkedIn games solutions by date.",
+      description: "Browse all archived LinkedIn games solutions by date.",
       url: `${SITE_URL}/archive`,
       siteName: "LinkedIn Games Solver",
       type: "website",
@@ -74,7 +76,10 @@ export function buildArchiveMetadata(): Metadata {
   };
 }
 
-export function buildGameHubMetadata(gameName: string, gameSlug: GameSlug): Metadata {
+export function buildGameHubMetadata(
+  gameName: string,
+  gameSlug: GameSlug,
+): Metadata {
   return {
     title: `LinkedIn ${gameName} Solutions & Archive`,
     description: `Daily LinkedIn ${gameName} answers, today's solution, and archive of past ${gameName} puzzles.`,

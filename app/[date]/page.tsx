@@ -1,9 +1,6 @@
 import { notFound, redirect } from "next/navigation";
 import type { Metadata } from "next";
-import {
-  fetchAvailableDates,
-  fetchSolution,
-} from "@/lib/api";
+import { fetchAvailableDates, fetchSolution } from "@/lib/api";
 import { buildPageMetadata } from "@/lib/metadata";
 import { formatDateShort, isToday, toIsoDate } from "@/lib/dateUtils";
 import { SITE_URL } from "@/lib/constants";

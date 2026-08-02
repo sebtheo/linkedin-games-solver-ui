@@ -9,7 +9,7 @@ export default function GameLinks({ date }: GameLinksProps) {
   return (
     <nav
       aria-label="Game solutions"
-      className="container mx-auto px-4 pb-4 max-w-3xl pt-4 sm:pt-0"
+      className="container mx-auto px-4 pb-4 max-w-3xl pt-8 sm:pt-0"
     >
       <h2 className="text-xl font-bold text-slate-800 dark:text-slate-100 mb-2">
         Individual game answers

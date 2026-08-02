@@ -20,7 +20,7 @@ const GameCard: React.FC<GameCardProps> = ({
   const { name, description, color, darkColor } = gameInfo;
 
   return (
-    <div className="bg-white dark:bg-slate-800 shadow-md transition-all duration-300 overflow-hidden">
+    <div className="bg-white dark:bg-slate-800 sm:shadow-md transition-all duration-300 overflow-hidden">
       <div
         className={`px-4 py-3 flex items-center justify-between cursor-pointer ${color} ${darkColor} text-white`}
         onClick={onToggle}
