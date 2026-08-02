@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { Moon, Sun, Github, Puzzle, Archive } from "lucide-react";
 import { useDarkMode } from "./DarkModeProvider";
+import Image from "next/image";
 
 export default function Header() {
   const { isDarkMode, toggleDarkMode } = useDarkMode();
@@ -11,7 +12,9 @@ export default function Header() {
     <header className="sticky top-0 z-10 bg-white/90 dark:bg-slate-900/90 transition-colors duration-300 backdrop-blur-sm">
       <div className="container mx-auto px-4 py-4 flex justify-between items-center">
         <div className="flex items-center justify-center space-x-2">
-          <img
+          <Image
+            width={32}
+            height={32}
             src="/logo512.png"
             alt="Logo"
             className="w-8 h-8 text-slate-800 dark:text-slate-100 mb-2"

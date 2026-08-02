@@ -4,7 +4,8 @@ import { DarkModeProvider } from "@/components/DarkModeProvider";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import RelatedLinks from "@/components/RelatedLinks";
-import { SITE_URL } from "@/lib/constants";
+import { SITE_URL, SITE_DESCRIPTION } from "@/lib/constants";
+import { buildSocialMetadata } from "@/lib/socialMetadata";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -13,8 +14,7 @@ export const metadata: Metadata = {
     default: "LinkedIn Games Solver",
     template: "%s | Solver",
   },
-  description:
-    "Daily solutions for LinkedIn games including Pinpoint, Queens, Zip, Tango, Crossclimb, and Mini Sudoku.",
+  description: SITE_DESCRIPTION,
   keywords: [
     "LinkedIn games",
     "LinkedIn games solutions today",
@@ -27,11 +27,15 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "SebTheo", url: "https://sebtheo.uk" }],
   robots: { index: true, follow: true },
-  openGraph: {
-    siteName: "LinkedIn Games Solver",
-    locale: "en_GB",
-    type: "website",
+  icons: {
+    icon: "/favicon.ico",
+    apple: "/logo512.png",
   },
+  ...buildSocialMetadata({
+    title: "LinkedIn Games Solver",
+    description: SITE_DESCRIPTION,
+    url: SITE_URL,
+  }),
 };
 
 export default function RootLayout({

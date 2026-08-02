@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { SITE_URL } from "./constants";
 import { formatDateShort, isToday } from "./dateUtils";
-import { GAME_NAMES_LIST, GameSlug, getGameSeoTitle } from "./games";
+import { GameSlug, getGameSeoTitle } from "./games";
+import { buildSocialMetadata } from "./socialMetadata";
 
 interface PageMetadataOptions {
   date: string;
@@ -21,16 +22,16 @@ export function buildPageMetadata({
 
   if (gameSlug) {
     const gameTitle = getGameSeoTitle(gameSlug);
-    title = `${gameTitle} Answer - ${readableDate}`;
-    description = `${gameTitle} solution for ${readableDate}. Daily LinkedIn games answers for ${GAME_NAMES_LIST}.`;
+    title = `${gameTitle} Answer — ${readableDate}`;
+    description = `${gameTitle} answer for ${readableDate}. Daily LinkedIn games solutions for all six puzzle games.`;
     path = `/${date}/${gameSlug}`;
   } else if (today) {
-    title = `LinkedIn Games Solutions Today - ${readableDate}`;
-    description = `Today's LinkedIn games answers and solutions for ${readableDate}. Pinpoint, Queens, Zip, Tango, Crossclimb, and Mini Sudoku results updated daily.`;
+    title = `LinkedIn Games Solutions Today — ${readableDate}`;
+    description = `Today's LinkedIn games answers for ${readableDate}. Pinpoint, Queens, Zip, Tango, Crossclimb and Mini Sudoku.`;
     path = "/";
   } else {
     title = `LinkedIn Games Answers for ${readableDate}`;
-    description = `LinkedIn games solutions for ${readableDate}. Answers for Pinpoint, Queens, Zip, Tango, Crossclimb, and Mini Sudoku.`;
+    description = `LinkedIn games answers for ${readableDate}. Pinpoint, Queens, Zip, Tango, Crossclimb and Mini Sudoku.`;
     path = `/${date}`;
   }
 
@@ -40,19 +41,12 @@ export function buildPageMetadata({
     title,
     description,
     alternates: { canonical },
-    openGraph: {
+    ...buildSocialMetadata({
       title,
       description,
       url: canonical,
-      siteName: "LinkedIn Games Solver",
       type: "article",
-      locale: "en_GB",
-    },
-    twitter: {
-      card: "summary",
-      title,
-      description,
-    },
+    }),
     robots: {
       index: true,
       follow: true,
@@ -61,18 +55,19 @@ export function buildPageMetadata({
 }
 
 export function buildArchiveMetadata(): Metadata {
+  const title = "LinkedIn Games Archive";
+  const description =
+    "Browse archived LinkedIn games answers by date. Pinpoint, Queens, Zip, Tango, Crossclimb and Mini Sudoku.";
+
   return {
-    title: "LinkedIn Games Archive",
-    description:
-      "Browse all archived LinkedIn games solutions by date. Pinpoint, Queens, Zip, Tango, Crossclimb, and Mini Sudoku answers.",
+    title,
+    description,
     alternates: { canonical: `${SITE_URL}/archive` },
-    openGraph: {
-      title: "LinkedIn Games Archive",
-      description: "Browse all archived LinkedIn games solutions by date.",
+    ...buildSocialMetadata({
+      title,
+      description,
       url: `${SITE_URL}/archive`,
-      siteName: "LinkedIn Games Solver",
-      type: "website",
-    },
+    }),
   };
 }
 
@@ -80,16 +75,17 @@ export function buildGameHubMetadata(
   gameName: string,
   gameSlug: GameSlug,
 ): Metadata {
+  const title = `LinkedIn ${gameName} Solutions & Archive`;
+  const description = `Daily LinkedIn ${gameName} answers, today's solution, and an archive of past ${gameName} puzzles.`;
+
   return {
-    title: `LinkedIn ${gameName} Solutions & Archive`,
-    description: `Daily LinkedIn ${gameName} answers, today's solution, and archive of past ${gameName} puzzles.`,
+    title,
+    description,
     alternates: { canonical: `${SITE_URL}/games/${gameSlug}` },
-    openGraph: {
-      title: `LinkedIn ${gameName} Solutions`,
-      description: `Daily LinkedIn ${gameName} answers and archive.`,
+    ...buildSocialMetadata({
+      title,
+      description,
       url: `${SITE_URL}/games/${gameSlug}`,
-      siteName: "LinkedIn Games Solver",
-      type: "website",
-    },
+    }),
   };
 }
