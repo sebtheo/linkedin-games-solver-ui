@@ -1,5 +1,5 @@
 import { API_BASE_URL } from "./constants";
-import { DatesResponse, SolutionResponse } from "@/types";
+import { DatesResponse, Solution, SolutionResponse } from "@/types";
 
 async function fetchWithRetry(
   url: string,
@@ -32,6 +32,32 @@ export async function fetchAvailableDates(): Promise<string[]> {
   return data.dates;
 }
 
+export function hasCompleteSolution(solution: Solution): boolean {
+  return Boolean(
+    solution.pinpoint &&
+    solution.crossclimb &&
+    solution.queens &&
+    solution.zip &&
+    solution.tango &&
+    solution.mini_sudoku,
+  );
+}
+
+async function fetchSolutionResponse(
+  url: string,
+  revalidate: number | false,
+): Promise<SolutionResponse> {
+  const response = await fetchWithRetry(url, {
+    next: { revalidate },
+  });
+
+  if (!response.ok) {
+    throw new Error(`Failed to fetch solution: ${response.statusText}`);
+  }
+
+  return response.json();
+}
+
 export async function fetchSolution(
   date?: string,
   options?: { revalidate?: number | false },
@@ -40,15 +66,20 @@ export async function fetchSolution(
     ? `${API_BASE_URL}/solutions/?date=${date}`
     : `${API_BASE_URL}/solutions/`;
 
-  const response = await fetchWithRetry(url, {
-    next: { revalidate: options?.revalidate ?? (date ? false : 3600) },
-  });
-
-  if (!response.ok) {
-    throw new Error(`Failed to fetch solution: ${response.statusText}`);
+  if (options?.revalidate !== undefined) {
+    return fetchSolutionResponse(url, options.revalidate);
   }
 
-  return response.json();
+  if (date) {
+    return fetchSolutionResponse(url, false);
+  }
+
+  const shortLived = await fetchSolutionResponse(url, 60);
+  if (!hasCompleteSolution(shortLived.solutions.data)) {
+    return shortLived;
+  }
+
+  return fetchSolutionResponse(url, 3600);
 }
 
 export function getAdjacentDates(
