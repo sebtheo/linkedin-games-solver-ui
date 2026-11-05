@@ -9,8 +9,8 @@ export default function Header() {
   const { isDarkMode, toggleDarkMode } = useDarkMode();
 
   return (
-    <header className="sticky top-0 z-10 bg-white/90 dark:bg-slate-900/90 transition-colors duration-300 backdrop-blur-sm">
-      <div className="container mx-auto px-4 py-4 flex justify-between items-center">
+    <header className="sticky top-0 z-10 bg-white dark:bg-[#1a1d20] transition-colors duration-300">
+      <div className="container max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
         <div className="flex items-center justify-center space-x-2">
           <Image
             width={32}

@@ -26,7 +26,7 @@ export default function PageIntro({ date, gameName }: PageIntroProps) {
   }
 
   return (
-    <section className="container mx-auto py-2 px-4 sm:py-6 max-w-3xl">
+    <section className="container mx-auto py-2 px-4 sm:py-6 max-w-4xl">
       <h1 className="text-2xl sm:text-3xl font-bold text-slate-800 dark:text-slate-100 mb-3">
         {today
           ? `LinkedIn Games Solutions Today - ${readableDate}`

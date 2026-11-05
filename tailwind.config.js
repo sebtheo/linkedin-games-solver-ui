@@ -9,7 +9,21 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ["TikTok Sans", "system-ui", "sans-serif"],
+        sans: [
+          "-apple-system",
+          "system-ui",
+          "BlinkMacSystemFont",
+          "Segoe UI",
+          "Roboto",
+          "Helvetica Neue",
+          "Fira Sans",
+          "Ubuntu",
+          "Oxygen",
+          "Oxygen Sans",
+          "Cantarell",
+          "Droid Sans",
+          "sans-serif",
+        ],
       },
       colors: {
         linkedin: {

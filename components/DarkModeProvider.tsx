@@ -31,12 +31,12 @@ export function DarkModeProvider({ children }: { children: React.ReactNode }) {
 
     if (isDarkMode) {
       document.documentElement.classList.add("dark");
-      document.documentElement.style.backgroundColor = "#0f172a";
-      document.body.style.backgroundColor = "#0f172a";
+      document.documentElement.style.backgroundColor = "#000000";
+      document.body.style.backgroundColor = "#000000";
     } else {
       document.documentElement.classList.remove("dark");
-      document.documentElement.style.backgroundColor = "#ffffff";
-      document.body.style.backgroundColor = "#ffffff";
+      document.documentElement.style.backgroundColor = "#f2f0ec";
+      document.body.style.backgroundColor = "#f2f0ec";
     }
 
     localStorage.setItem("darkMode", String(isDarkMode));
