@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Analytics } from "@vercel/analytics/react";
 import { DarkModeProvider } from "@/components/DarkModeProvider";
+import GoogleAnalytics from "@/components/GoogleAnalytics";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import RelatedLinks from "@/components/RelatedLinks";
@@ -53,6 +54,11 @@ export default function RootLayout({
           <Footer />
         </DarkModeProvider>
         <Analytics />
+        {process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID ? (
+          <GoogleAnalytics
+            measurementId={process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID}
+          />
+        ) : null}
       </body>
     </html>
   );

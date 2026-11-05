@@ -4,6 +4,7 @@ import { fetchAvailableDates, fetchSolution } from "@/lib/api";
 import { buildPageMetadata } from "@/lib/metadata";
 import { formatDateShort, isToday, toIsoDate } from "@/lib/dateUtils";
 import { SITE_URL } from "@/lib/constants";
+import { withSearch } from "@/lib/searchParams";
 import PageIntro from "@/components/PageIntro";
 import DateSelector from "@/components/DateSelector";
 import SolutionContainer from "@/components/SolutionContainer";
@@ -23,6 +24,7 @@ export const dynamicParams = true;
 
 interface DatePageProps {
   params: Promise<{ date: string }>;
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
 }
 
 export async function generateMetadata({
@@ -32,11 +34,14 @@ export async function generateMetadata({
   return buildPageMetadata({ date });
 }
 
-export default async function DatePage({ params }: DatePageProps) {
+export default async function DatePage({
+  params,
+  searchParams,
+}: DatePageProps) {
   const { date } = await params;
 
   if (isToday(date)) {
-    redirect("/");
+    redirect(withSearch("/", await searchParams));
   }
 
   const [dates, solution] = await Promise.all([

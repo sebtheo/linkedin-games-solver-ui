@@ -8,6 +8,7 @@ import {
   toIsoDate,
 } from "@/lib/dateUtils";
 import { SITE_URL } from "@/lib/constants";
+import { withSearch } from "@/lib/searchParams";
 import PageIntro from "@/components/PageIntro";
 import DateSelector from "@/components/DateSelector";
 import SolutionContainer from "@/components/SolutionContainer";
@@ -28,16 +29,21 @@ export async function generateMetadata() {
   return buildPageMetadata({ date: today });
 }
 
-export default async function HomePage() {
-  const [dates, solution] = await Promise.all([
+export default async function HomePage({
+  searchParams,
+}: {
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
+}) {
+  const [dates, solution, params] = await Promise.all([
     fetchAvailableDates(),
     fetchSolution(),
+    searchParams,
   ]);
 
   const date = solution.date;
 
   if (!isToday(date)) {
-    redirect(`/${date}`);
+    redirect(withSearch(`/${date}`, params));
   }
 
   const readableDate = formatDateShort(date);
