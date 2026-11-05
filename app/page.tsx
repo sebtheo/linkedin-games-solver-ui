@@ -1,5 +1,10 @@
+import { unstable_noStore as noStore } from "next/cache";
 import { redirect } from "next/navigation";
-import { fetchAvailableDates, fetchSolution } from "@/lib/api";
+import {
+  fetchAvailableDates,
+  fetchSolution,
+  hasCompleteSolution,
+} from "@/lib/api";
 import { buildPageMetadata } from "@/lib/metadata";
 import {
   formatDateShort,
@@ -39,6 +44,10 @@ export default async function HomePage({
     fetchSolution(),
     searchParams,
   ]);
+
+  if (!hasCompleteSolution(solution.solutions.data)) {
+    noStore();
+  }
 
   const date = solution.date;
 
