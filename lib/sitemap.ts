@@ -1,6 +1,5 @@
 import type { MetadataRoute } from "next";
 import { fetchAvailableDates } from "@/lib/api";
-import { SITE_URL } from "@/lib/constants";
 import { GAME_SLUGS } from "@/lib/games";
 
 type SitemapEntry = MetadataRoute.Sitemap[number];
@@ -31,11 +30,11 @@ async function loadDates(): Promise<string[]> {
   }
 }
 
-function dateEntries(date: string): SitemapEntry[] {
+function dateEntries(date: string, baseUrl: string): SitemapEntry[] {
   const lastModified = parsePuzzleDate(date) ?? new Date();
   const entries: SitemapEntry[] = [
     {
-      url: `${SITE_URL}/${date}`,
+      url: `${baseUrl}/${date}`,
       lastModified,
       changeFrequency: "monthly",
       priority: 0.8,
@@ -44,7 +43,7 @@ function dateEntries(date: string): SitemapEntry[] {
 
   for (const game of GAME_SLUGS) {
     entries.push({
-      url: `${SITE_URL}/${date}/${game}`,
+      url: `${baseUrl}/${date}/${game}`,
       lastModified,
       changeFrequency: "monthly",
       priority: 0.6,
@@ -86,16 +85,19 @@ export async function getSitemapPartition(): Promise<{
   return { newest, byMonth };
 }
 
-export function coreSitemap(newest: string | null): MetadataRoute.Sitemap {
+export function coreSitemap(
+  newest: string | null,
+  baseUrl: string,
+): MetadataRoute.Sitemap {
   const entries: MetadataRoute.Sitemap = [
     {
-      url: SITE_URL,
+      url: baseUrl,
       lastModified: new Date(),
       changeFrequency: "daily",
       priority: 1,
     },
     {
-      url: `${SITE_URL}/archive`,
+      url: `${baseUrl}/archive`,
       lastModified: new Date(),
       changeFrequency: "daily",
       priority: 0.7,
@@ -104,7 +106,7 @@ export function coreSitemap(newest: string | null): MetadataRoute.Sitemap {
 
   for (const game of GAME_SLUGS) {
     entries.push({
-      url: `${SITE_URL}/games/${game}`,
+      url: `${baseUrl}/games/${game}`,
       lastModified: new Date(),
       changeFrequency: "daily",
       priority: 0.7,
@@ -112,14 +114,17 @@ export function coreSitemap(newest: string | null): MetadataRoute.Sitemap {
   }
 
   if (newest) {
-    entries.push(...dateEntries(newest));
+    entries.push(...dateEntries(newest, baseUrl));
   }
 
   return entries;
 }
 
-export function monthSitemap(dates: string[]): MetadataRoute.Sitemap {
-  return dates.flatMap(dateEntries);
+export function monthSitemap(
+  dates: string[],
+  baseUrl: string,
+): MetadataRoute.Sitemap {
+  return dates.flatMap((date) => dateEntries(date, baseUrl));
 }
 
 function escapeXml(value: string): string {
@@ -158,14 +163,14 @@ export function renderUrlSet(entries: MetadataRoute.Sitemap): string {
   return content;
 }
 
-export function renderSitemapIndex(ids: number[]): string {
+export function renderSitemapIndex(ids: number[], baseUrl: string): string {
   let content = '<?xml version="1.0" encoding="UTF-8"?>\n';
   content +=
     '<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n';
 
   for (const id of ids) {
     content += "<sitemap>\n";
-    content += `<loc>${escapeXml(`${SITE_URL}/sitemap/${id}.xml`)}</loc>\n`;
+    content += `<loc>${escapeXml(`${baseUrl}/sitemap/${id}.xml`)}</loc>\n`;
     content += "</sitemap>\n";
   }
 
