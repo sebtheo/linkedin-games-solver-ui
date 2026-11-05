@@ -5,7 +5,7 @@ export const OG_IMAGE = {
   url: "/og.jpg",
   width: 1200,
   height: 630,
-  alt: "LinkedIn Games Solver — daily answers for Pinpoint, Queens, Zip, Tango, Crossclimb and Mini Sudoku",
+  alt: "LinkedIn Games Solver - daily answers for Pinpoint, Queens, Zip, Tango, Crossclimb and Mini Sudoku",
 };
 
 export const SITE_DESCRIPTION =
