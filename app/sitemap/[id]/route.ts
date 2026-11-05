@@ -4,10 +4,9 @@ import {
   getSitemapPartition,
   monthSitemap,
   renderUrlSet,
-  SITEMAP_REVALIDATE,
 } from "@/lib/sitemap";
 
-export const revalidate = SITEMAP_REVALIDATE;
+export const revalidate = 3600;
 
 export async function GET(
   _request: Request,

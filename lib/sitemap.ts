@@ -3,8 +3,6 @@ import { fetchAvailableDates } from "@/lib/api";
 import { SITE_URL } from "@/lib/constants";
 import { GAME_SLUGS } from "@/lib/games";
 
-export const SITEMAP_REVALIDATE = 3600;
-
 type SitemapEntry = MetadataRoute.Sitemap[number];
 
 function parsePuzzleDate(date: string): Date | null {
