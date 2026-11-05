@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Moon, Sun, Github, Puzzle, Archive } from "lucide-react";
+import { Moon, Sun, Github, Archive } from "lucide-react";
 import { useDarkMode } from "./DarkModeProvider";
 import Image from "next/image";
 
