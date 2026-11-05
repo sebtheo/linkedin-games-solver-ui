@@ -1,12 +1,14 @@
+import { getRequestSiteUrl } from "@/lib/siteUrl";
 import { getSitemapPartition, renderSitemapIndex } from "@/lib/sitemap";
 
-export const revalidate = 3600;
+export const dynamic = "force-dynamic";
 
-export async function GET() {
+export async function GET(request: Request) {
   const { byMonth } = await getSitemapPartition();
   const monthIds = [...byMonth.keys()].sort((a, b) => b - a);
+  const baseUrl = getRequestSiteUrl(request);
 
-  return new Response(renderSitemapIndex([0, ...monthIds]), {
+  return new Response(renderSitemapIndex([0, ...monthIds], baseUrl), {
     headers: { "Content-Type": "application/xml" },
   });
 }

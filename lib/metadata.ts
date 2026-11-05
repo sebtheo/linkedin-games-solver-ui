@@ -22,11 +22,11 @@ export function buildPageMetadata({
 
   if (gameSlug) {
     const gameTitle = getGameSeoTitle(gameSlug);
-    title = `${gameTitle} Answer — ${readableDate}`;
+    title = `${gameTitle} Answer - ${readableDate}`;
     description = `${gameTitle} answer for ${readableDate}. Daily LinkedIn games solutions for all six puzzle games.`;
     path = `/${date}/${gameSlug}`;
   } else if (today) {
-    title = `LinkedIn Games Solutions Today — ${readableDate}`;
+    title = `LinkedIn Games Solutions Today - ${readableDate}`;
     description = `Today's LinkedIn games answers for ${readableDate}. Pinpoint, Queens, Zip, Tango, Crossclimb and Mini Sudoku.`;
     path = "/";
   } else {

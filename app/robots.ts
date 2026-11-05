@@ -1,12 +1,15 @@
 import type { MetadataRoute } from "next";
-import { SITE_URL } from "@/lib/constants";
+import { headers } from "next/headers";
+import { getSiteUrlFromHeaders } from "@/lib/siteUrl";
 
-export default function robots(): MetadataRoute.Robots {
+export default async function robots(): Promise<MetadataRoute.Robots> {
+  const origin = getSiteUrlFromHeaders(await headers());
+
   return {
     rules: {
       userAgent: "*",
       allow: "/",
     },
-    sitemap: `${SITE_URL}/sitemap.xml`,
+    sitemap: `${origin}/sitemap.xml`,
   };
 }
