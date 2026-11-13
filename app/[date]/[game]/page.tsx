@@ -4,7 +4,7 @@ import Link from "next/link";
 import { fetchAvailableDates, fetchSolution } from "@/lib/api";
 import { buildPageMetadata } from "@/lib/metadata";
 import { formatDateShort, isToday, toIsoDate } from "@/lib/dateUtils";
-import { SITE_URL } from "@/lib/constants";
+import { getCurrentSiteUrl } from "@/lib/siteUrl";
 import { GAMES, GameSlug, isValidGameSlug, slugToGameKey } from "@/lib/games";
 import PageIntro from "@/components/PageIntro";
 import DateSelector from "@/components/DateSelector";
@@ -32,7 +32,11 @@ export async function generateMetadata({
   if (!isValidGameSlug(game)) {
     return { title: "Not Found" };
   }
-  return buildPageMetadata({ date, gameSlug: game });
+  return buildPageMetadata({
+    date,
+    gameSlug: game,
+    siteUrl: await getCurrentSiteUrl(),
+  });
 }
 
 export default async function GamePage({ params }: GamePageProps) {
@@ -56,7 +60,8 @@ export default async function GamePage({ params }: GamePageProps) {
   }
 
   const readableDate = formatDateShort(date);
-  const pageUrl = `${SITE_URL}/${date}/${gameSlug}`;
+  const siteUrl = await getCurrentSiteUrl();
+  const pageUrl = `${siteUrl}/${date}/${gameSlug}`;
   const datePath = isToday(date) ? "/" : `/${date}`;
 
   return (
@@ -67,17 +72,19 @@ export default async function GamePage({ params }: GamePageProps) {
             name: `LinkedIn ${gameInfo.name} Answer - ${readableDate}`,
             description: `${gameInfo.name} solution for ${readableDate}.`,
             url: pageUrl,
+            siteUrl,
             datePublished: toIsoDate(date),
           }),
           buildArticleJsonLd({
             headline: `LinkedIn ${gameInfo.name} Answer - ${readableDate}`,
             description: `${gameInfo.name} solution for ${readableDate}.`,
             url: pageUrl,
+            siteUrl,
             datePublished: toIsoDate(date),
           }),
           buildBreadcrumbJsonLd([
-            { name: "Home", href: SITE_URL },
-            { name: readableDate, href: `${SITE_URL}${datePath}` },
+            { name: "Home", href: siteUrl },
+            { name: readableDate, href: `${siteUrl}${datePath}` },
             { name: gameInfo.name, href: pageUrl },
           ]),
         ]}

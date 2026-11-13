@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { fetchAvailableDates } from "@/lib/api";
+import { isToday } from "@/lib/dateUtils";
 import { GAME_SLUGS } from "@/lib/games";
 
 type SitemapEntry = MetadataRoute.Sitemap[number];
@@ -31,26 +32,16 @@ async function loadDates(): Promise<string[]> {
 }
 
 function dateEntries(date: string, baseUrl: string): SitemapEntry[] {
-  const lastModified = parsePuzzleDate(date) ?? new Date();
-  const entries: SitemapEntry[] = [
+  if (isToday(date)) return [];
+
+  return [
     {
       url: `${baseUrl}/${date}`,
-      lastModified,
+      lastModified: parsePuzzleDate(date) ?? new Date(),
       changeFrequency: "monthly",
       priority: 0.8,
     },
   ];
-
-  for (const game of GAME_SLUGS) {
-    entries.push({
-      url: `${baseUrl}/${date}/${game}`,
-      lastModified,
-      changeFrequency: "monthly",
-      priority: 0.6,
-    });
-  }
-
-  return entries;
 }
 
 export async function getSitemapPartition(): Promise<{

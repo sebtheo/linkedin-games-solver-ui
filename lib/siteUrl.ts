@@ -1,3 +1,4 @@
+import { headers } from "next/headers";
 import { SITE_URL } from "./constants";
 
 export function getSiteUrlFromHeaders(headers: Headers): string {
@@ -18,4 +19,8 @@ export function getSiteUrlFromHeaders(headers: Headers): string {
 
 export function getRequestSiteUrl(request: Request): string {
   return getSiteUrlFromHeaders(request.headers);
+}
+
+export async function getCurrentSiteUrl(): Promise<string> {
+  return getSiteUrlFromHeaders(await headers());
 }

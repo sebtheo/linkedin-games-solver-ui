@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { fetchAvailableDates, fetchSolution } from "@/lib/api";
 import { buildPageMetadata } from "@/lib/metadata";
 import { formatDateShort, isToday, toIsoDate } from "@/lib/dateUtils";
-import { SITE_URL } from "@/lib/constants";
+import { getCurrentSiteUrl } from "@/lib/siteUrl";
 import { withSearch } from "@/lib/searchParams";
 import PageIntro from "@/components/PageIntro";
 import DateSelector from "@/components/DateSelector";
@@ -31,7 +31,7 @@ export async function generateMetadata({
   params,
 }: DatePageProps): Promise<Metadata> {
   const { date } = await params;
-  return buildPageMetadata({ date });
+  return buildPageMetadata({ date, siteUrl: await getCurrentSiteUrl() });
 }
 
 export default async function DatePage({
@@ -54,7 +54,8 @@ export default async function DatePage({
   }
 
   const readableDate = formatDateShort(date);
-  const pageUrl = `${SITE_URL}/${date}`;
+  const siteUrl = await getCurrentSiteUrl();
+  const pageUrl = `${siteUrl}/${date}`;
 
   return (
     <main className="min-h-screen">
@@ -64,16 +65,18 @@ export default async function DatePage({
             name: `LinkedIn Games Answers for ${readableDate}`,
             description: `LinkedIn games solutions for ${readableDate}.`,
             url: pageUrl,
+            siteUrl,
             datePublished: toIsoDate(date),
           }),
           buildArticleJsonLd({
             headline: `LinkedIn Games Answers for ${readableDate}`,
             description: `LinkedIn games solutions for ${readableDate}.`,
             url: pageUrl,
+            siteUrl,
             datePublished: toIsoDate(date),
           }),
           buildBreadcrumbJsonLd([
-            { name: "Home", href: SITE_URL },
+            { name: "Home", href: siteUrl },
             { name: readableDate, href: pageUrl },
           ]),
         ]}

@@ -3,7 +3,7 @@ import Link from "next/link";
 import { fetchAvailableDates, groupDatesByMonth } from "@/lib/api";
 import { buildArchiveMetadata } from "@/lib/metadata";
 import { formatDateShort, formatMonthYear, getDatePath } from "@/lib/dateUtils";
-import { SITE_URL } from "@/lib/constants";
+import { getCurrentSiteUrl } from "@/lib/siteUrl";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import JsonLd from "@/components/JsonLd";
 import {
@@ -13,10 +13,15 @@ import {
 
 export const revalidate = 3600;
 
-export const metadata: Metadata = buildArchiveMetadata();
+export async function generateMetadata(): Promise<Metadata> {
+  return buildArchiveMetadata(await getCurrentSiteUrl());
+}
 
 export default async function ArchivePage() {
-  const dates = await fetchAvailableDates();
+  const [dates, siteUrl] = await Promise.all([
+    fetchAvailableDates(),
+    getCurrentSiteUrl(),
+  ]);
   const grouped = groupDatesByMonth(dates);
   const sortedMonths = Object.keys(grouped).sort((a, b) => b.localeCompare(a));
 
@@ -28,11 +33,12 @@ export default async function ArchivePage() {
             name: "LinkedIn Games Archive",
             description:
               "Browse all archived LinkedIn games solutions by date.",
-            url: `${SITE_URL}/archive`,
+            url: `${siteUrl}/archive`,
+            siteUrl,
           }),
           buildBreadcrumbJsonLd([
-            { name: "Home", href: SITE_URL },
-            { name: "Archive", href: `${SITE_URL}/archive` },
+            { name: "Home", href: siteUrl },
+            { name: "Archive", href: `${siteUrl}/archive` },
           ]),
         ]}
       />

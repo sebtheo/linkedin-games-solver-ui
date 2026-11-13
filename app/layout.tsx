@@ -36,6 +36,7 @@ export const metadata: Metadata = {
     title: "LinkedIn Games Solver",
     description: SITE_DESCRIPTION,
     url: SITE_URL,
+    siteUrl: SITE_URL,
   }),
 };
 

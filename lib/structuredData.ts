@@ -20,6 +20,7 @@ export function buildWebPageJsonLd(options: {
   name: string;
   description: string;
   url: string;
+  siteUrl: string;
   datePublished?: string;
 }) {
   return {
@@ -32,7 +33,7 @@ export function buildWebPageJsonLd(options: {
     isPartOf: {
       "@type": "WebSite",
       name: "LinkedIn Games Solver",
-      url: "https://solver.sebtheo.uk",
+      url: options.siteUrl,
     },
   };
 }
@@ -41,6 +42,7 @@ export function buildArticleJsonLd(options: {
   headline: string;
   description: string;
   url: string;
+  siteUrl: string;
   datePublished: string;
 }) {
   return {
@@ -58,7 +60,7 @@ export function buildArticleJsonLd(options: {
     publisher: {
       "@type": "Organization",
       name: "LinkedIn Games Solver",
-      url: "https://solver.sebtheo.uk",
+      url: options.siteUrl,
     },
   };
 }

@@ -1,16 +1,17 @@
 import type { Metadata } from "next";
-import { SITE_URL } from "./constants";
 import { formatDateShort, isToday } from "./dateUtils";
 import { GameSlug, getGameSeoTitle } from "./games";
 import { buildSocialMetadata } from "./socialMetadata";
 
 interface PageMetadataOptions {
   date: string;
+  siteUrl: string;
   gameSlug?: GameSlug;
 }
 
 export function buildPageMetadata({
   date,
+  siteUrl,
   gameSlug,
 }: PageMetadataOptions): Metadata {
   const readableDate = formatDateShort(date);
@@ -35,9 +36,10 @@ export function buildPageMetadata({
     path = `/${date}`;
   }
 
-  const canonical = today && !gameSlug ? SITE_URL : `${SITE_URL}${path}`;
+  const canonical = today && !gameSlug ? siteUrl : `${siteUrl}${path}`;
 
   return {
+    metadataBase: new URL(siteUrl),
     title,
     description,
     alternates: { canonical },
@@ -45,6 +47,7 @@ export function buildPageMetadata({
       title,
       description,
       url: canonical,
+      siteUrl,
       type: "article",
     }),
     robots: {
@@ -54,19 +57,23 @@ export function buildPageMetadata({
   };
 }
 
-export function buildArchiveMetadata(): Metadata {
+export function buildArchiveMetadata(siteUrl: string): Metadata {
   const title = "LinkedIn Games Archive";
   const description =
     "Browse archived LinkedIn games answers by date. Pinpoint, Queens, Zip, Tango, Crossclimb and Mini Sudoku.";
 
+  const canonical = `${siteUrl}/archive`;
+
   return {
+    metadataBase: new URL(siteUrl),
     title,
     description,
-    alternates: { canonical: `${SITE_URL}/archive` },
+    alternates: { canonical },
     ...buildSocialMetadata({
       title,
       description,
-      url: `${SITE_URL}/archive`,
+      url: canonical,
+      siteUrl,
     }),
   };
 }
@@ -74,18 +81,23 @@ export function buildArchiveMetadata(): Metadata {
 export function buildGameHubMetadata(
   gameName: string,
   gameSlug: GameSlug,
+  siteUrl: string,
 ): Metadata {
   const title = `LinkedIn ${gameName} Solutions & Archive`;
   const description = `Daily LinkedIn ${gameName} answers, today's solution, and an archive of past ${gameName} puzzles.`;
 
+  const canonical = `${siteUrl}/games/${gameSlug}`;
+
   return {
+    metadataBase: new URL(siteUrl),
     title,
     description,
-    alternates: { canonical: `${SITE_URL}/games/${gameSlug}` },
+    alternates: { canonical },
     ...buildSocialMetadata({
       title,
       description,
-      url: `${SITE_URL}/games/${gameSlug}`,
+      url: canonical,
+      siteUrl,
     }),
   };
 }

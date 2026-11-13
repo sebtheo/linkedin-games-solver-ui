@@ -12,7 +12,7 @@ import {
   isToday,
   toIsoDate,
 } from "@/lib/dateUtils";
-import { SITE_URL } from "@/lib/constants";
+import { getCurrentSiteUrl } from "@/lib/siteUrl";
 import { withSearch } from "@/lib/searchParams";
 import PageIntro from "@/components/PageIntro";
 import DateSelector from "@/components/DateSelector";
@@ -31,7 +31,7 @@ export const revalidate = 3600;
 
 export async function generateMetadata() {
   const today = getFormattedToday();
-  return buildPageMetadata({ date: today });
+  return buildPageMetadata({ date: today, siteUrl: await getCurrentSiteUrl() });
 }
 
 export default async function HomePage({
@@ -56,7 +56,8 @@ export default async function HomePage({
   }
 
   const readableDate = formatDateShort(date);
-  const pageUrl = SITE_URL;
+  const siteUrl = await getCurrentSiteUrl();
+  const pageUrl = siteUrl;
 
   return (
     <main className="min-h-screen">
@@ -66,14 +67,16 @@ export default async function HomePage({
             name: `LinkedIn Games Solutions Today - ${readableDate}`,
             description: `Today's LinkedIn games answers for ${readableDate}.`,
             url: pageUrl,
+            siteUrl,
           }),
           buildArticleJsonLd({
             headline: `LinkedIn Games Solutions Today - ${readableDate}`,
             description: `Daily LinkedIn games answers for ${readableDate}.`,
             url: pageUrl,
+            siteUrl,
             datePublished: toIsoDate(date),
           }),
-          buildBreadcrumbJsonLd([{ name: "Home", href: SITE_URL }]),
+          buildBreadcrumbJsonLd([{ name: "Home", href: siteUrl }]),
           buildFaqJsonLd(),
         ]}
       />

@@ -4,7 +4,7 @@ import Link from "next/link";
 import { fetchAvailableDates, fetchSolution } from "@/lib/api";
 import { buildGameHubMetadata } from "@/lib/metadata";
 import { formatDateShort } from "@/lib/dateUtils";
-import { SITE_URL } from "@/lib/constants";
+import { getCurrentSiteUrl } from "@/lib/siteUrl";
 import {
   GAME_SLUGS,
   GAMES,
@@ -38,7 +38,11 @@ export async function generateMetadata({
     return { title: "Not Found" };
   }
   const gameInfo = GAMES[slugToGameKey(game as GameSlug)];
-  return buildGameHubMetadata(gameInfo.name, game as GameSlug);
+  return buildGameHubMetadata(
+    gameInfo.name,
+    game as GameSlug,
+    await getCurrentSiteUrl(),
+  );
 }
 
 export default async function GameHubPage({ params }: GameHubPageProps) {
@@ -59,7 +63,8 @@ export default async function GameHubPage({ params }: GameHubPageProps) {
 
   const recentDates = dates.slice(0, 30);
   const todayDate = solution.date;
-  const pageUrl = `${SITE_URL}/games/${gameSlug}`;
+  const siteUrl = await getCurrentSiteUrl();
+  const pageUrl = `${siteUrl}/games/${gameSlug}`;
 
   return (
     <main className="min-h-screen">
@@ -69,9 +74,10 @@ export default async function GameHubPage({ params }: GameHubPageProps) {
             name: `LinkedIn ${gameInfo.name} Solutions`,
             description: gameInfo.description,
             url: pageUrl,
+            siteUrl,
           }),
           buildBreadcrumbJsonLd([
-            { name: "Home", href: SITE_URL },
+            { name: "Home", href: siteUrl },
             { name: gameInfo.name, href: pageUrl },
           ]),
         ]}
